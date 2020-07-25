@@ -19,8 +19,10 @@ mongoose.connection.once('open', () => {
 
 //Routes
 const ledsRouter = require('./routes/leds');
+const queueRouter = require('./routes/queue');
 
 app.use('/leds', ledsRouter);
+app.use('/queue', queueRouter);
 
 //Launch App
 app.listen(port, () => {
