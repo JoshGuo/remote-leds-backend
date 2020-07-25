@@ -5,7 +5,7 @@ const queueSchema = new mongoose.Schema({
         type: [Map],
         default: []
     },
-    queueHistory: {
+    dequeueHistory: {
         type: [Map],
         default: []
     }
