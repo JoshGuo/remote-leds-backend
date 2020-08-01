@@ -8,8 +8,13 @@ const e = require('express');
 //Peek at entire queue
 router.route('/').get((req, res) => {
     QueueModel.findOne()
-        .then(Queue => res.json(Queue))
-        .catch(err => res.status(400).json('Error: ' + err));
+        .then((Queue) => {
+            if(Queue)
+                res.json(Queue);
+            else{
+                new QueueModel({}).save().then((Queue) => res.json(Queue));
+            }
+        }).catch(err => res.status(400).json('Error: ' + err));
 });
 
 //Dequeue
