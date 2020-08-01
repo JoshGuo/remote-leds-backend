@@ -8,6 +8,13 @@ const queueSchema = new mongoose.Schema({
     dequeueHistory: {
         type: [Map],
         default: []
+    },
+    currentMode: {
+        type: Map,
+        default: {
+            mode: -1,
+            name: "Default"
+        }
     }
 });
 

@@ -22,7 +22,10 @@ router.route('/dequeue').get((req, res) => {
                     res.status(400).json("There is nothing in the queue");
                 }else{
                     let mode = queue.shift();
-                    Queue.set("queue", queue).save().then(() => {
+                    Queue.currentMode = mode;
+                    Queue.dequeueHistory.push(mode);
+                    if(Queue.dequeueHistory.length > 10) Queue.dequeueHistory.shift();
+                    Queue.save().then(() => {
                         res.json(mode);
                     });
                 }
