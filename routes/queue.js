@@ -40,6 +40,23 @@ router.route('/dequeue').get((req, res) => {
         }).catch(err => res.status(400).json('Error: ' + err));
 });
 
+//Dequeue First
+router.route('/current').get((req, res) => {
+  QueueModel.findOne()
+    .then(Queue => {
+      if(Queue) {
+        let {currentMode} = Queue;
+        if(!currentMode) {
+          res.status(400).json("No current mode found");
+        }else {
+          res.json(currentMode);
+        }
+      }else{
+        res.status(400).json("There is no queue");
+      }
+    }).catch(err => res.status(400).json('Error: asdf ' + err));
+})
+
 //Put Requests
 
 //Enqueue
